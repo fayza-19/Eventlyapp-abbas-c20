@@ -1,0 +1,46 @@
+flutter_native_splash:
+  color: "#F4F7FF"
+  image:         assets/images/Evently.png
+  branding:      assets/images/Logo.png
+  branding_bottom_padding: 24
+  #branding_bottom_padding_android: 24  # default 0
+  #branding_bottom_padding_ios: 24      # default 0
+  # branding bottom padding web is not available yet.
+
+  # The screen orientation can be set in Android with the android_screen_orientation parameter.
+  # Valid parameters can be found here:
+  # https://developer.android.com/guide/topics/manifest/activity-element#screen
+  #android_screen_orientation: sensorLandscape
+
+  # By specifying the used minimum SDK version of Android, flutter_native_splash might be able to
+  # merge/remove certain styles and drawables.
+  #android_min_sdk: 24  # default 16
+
+  # hide notif bar on android. ios already hides it by default.
+  # Has no effect in web since web has no notification bar.
+  fullscreen: true                # default false
+  android_12:
+    color: "#F4F7FF"
+    image: assets/images/Evently.png
+    branding: assets/images/Logo.png
+    branding_bottom_padding: 24
+    # background color
+
+    # color_dark: "#042a49"
+
+    # center-logo
+    # If this parameter is not specified, the app's launcher icon will be used instead.
+    # with background: 960×960 px (fit within circle 640px in diameter)
+    # without background: 1152×1152 px (fit within circle 768px in diameter)
+    # ensure that the most important design elements of your image are placed within a circular area
+
+    # image_dark: assets/images/logo/logo-splash2.png
+
+    # center-logo background color
+    icon_background_color: "#111111"
+    # icon_background_color_dark: "#eeeeee"
+
+    # branding:
+    # The branding image dimensions must be 800x320 px.
+    #branding:      assets/dart.png
+    #branding_dark: assets/dart_dark.png
