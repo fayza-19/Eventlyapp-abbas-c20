@@ -1,12 +1,28 @@
+import 'package:evently/core/widgets/custometext.dart';
 import 'package:flutter/material.dart';
+import '../../../core/widgets/event_item.dart';
+import '../../../models/categorymodel.dart';
+import '../../../models/event_model.dart';
 
-class Favtab extends StatelessWidget {
-  const Favtab({super.key});
+class Favourite extends StatelessWidget {
+  const Favourite({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.deepOrange,
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Custometext(hinttext:  "Search For Event", sufixicon:  Icon(Icons.search)),
+            Expanded(child: ListView.separated(
+                padding: EdgeInsets.only(top: 16),
+                itemBuilder: (context,index)=>EventItem(event: EventModel(id: 1, category: CategoryModel.categories[0], title: "Meeting for Updating The Development Method ", description: "Meeting for Updating The Development Method ", date: DateTime.now(), time: TimeOfDay.now()),),
+                separatorBuilder: (context, index)=>SizedBox(height: 8,),
+                itemCount: 20))
+          ],
+        ),
+      ),
     );
   }
 }

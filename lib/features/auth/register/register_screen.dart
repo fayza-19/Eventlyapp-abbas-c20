@@ -61,15 +61,15 @@ GlobalKey<FormState> formkey = GlobalKey<FormState>();
                 SizedBox(height: 24,),
                 Text('Create your Account' , style: Theme.of(context).textTheme.headlineLarge ,)
                 ,SizedBox(height: 16,)
-                ,Custometext( Validator : Validator.validname,controller: namecontroller,hinttext: "Enter your Name",prefixicon: Icon(Icons.person),),
+                ,Custometext( validator : Validator.validname,controller: namecontroller,hinttext: "Enter your Name",prefixicon: Icon(Icons.person),),
                 SizedBox(height: 16,)
                 ,Custometext(
-                  Validator : Validator.validemail,
+                  validator : Validator.validemail,
                   controller: emailcontroller,hinttext: "Enter your Email",prefixicon: Icon(Icons.email),),
                 SizedBox(height: 16,)
-                ,Custometext(Validator : Validator.validpass,controller: passcontroller,hinttext: "Enter your Password",prefixicon: Icon(Icons.lock),sufixicon: Icon(Icons.visibility),),
+                ,Custometext(validator : Validator.validpass,controller: passcontroller,hinttext: "Enter your Password",prefixicon: Icon(Icons.lock),sufixicon: Icon(Icons.visibility),),
                 SizedBox(height: 16,)
-                ,Custometext(Validator : (input){
+                ,Custometext(validator : (input){
                   if(input != passcontroller.text){
                     return"Password doesn't match";
                   }

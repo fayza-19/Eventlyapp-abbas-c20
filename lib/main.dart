@@ -13,12 +13,14 @@ class Evently extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+
       debugShowCheckedModeBanner: false,
       initialRoute: RoutesManager.mainlayout,
       onGenerateRoute: RoutesManager.getRoute,
       theme:ThemeManager.light ,
       darkTheme: ThemeManager.dark,
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.light
+      ,
       locale: Locale('en'),
 
     );

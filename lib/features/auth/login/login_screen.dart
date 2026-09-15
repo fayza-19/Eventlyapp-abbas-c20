@@ -49,9 +49,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 30,),
                 Text('Login To your Account' , style: Theme.of(context).textTheme.headlineLarge ,)
                 ,SizedBox(height: 16,)
-                ,Custometext(Validator:Validator.validemail,controller :emailcontroller, hinttext: "Enter your Email",prefixicon: Icon(Icons.email),),
+                ,Custometext(validator:Validator.validemail,controller :emailcontroller, hinttext: "Enter your Email",prefixicon: Icon(Icons.email),),
                 SizedBox(height: 16,)
-                ,Custometext(Validator:Validator.validpass,controller: passcontroller,hinttext: "Enter your Password",prefixicon: Icon(Icons.lock),sufixicon: Icon(Icons.visibility),),
+                ,Custometext(validator:Validator.validpass,controller: passcontroller,hinttext: "Enter your Password",prefixicon: Icon(Icons.lock),sufixicon: Icon(Icons.visibility),),
                 SizedBox(height: 8,),
                 CustomTextButton(text: "Forget password",textalign: TextAlign.end, ontap: (){})
                 ,SizedBox(height: 52,),

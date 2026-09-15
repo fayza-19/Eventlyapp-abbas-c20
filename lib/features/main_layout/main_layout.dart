@@ -14,7 +14,7 @@ class _MainLayoutState extends State<MainLayout> {
  int TappedIndex = 0 ;
   List<Widget> tabs = [
    Hometab(),
-   Favtab(),
+   Favourite(),
    Profiletab()
  ];
   @override
