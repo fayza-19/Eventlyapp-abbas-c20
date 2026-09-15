@@ -1,5 +1,6 @@
 
 
+import 'package:evently/features/main_layout/main_layout.dart';
 import 'package:flutter/material.dart';
 
 import '../features/auth/login/login_screen.dart';
@@ -8,6 +9,7 @@ import '../features/auth/register/register_screen.dart';
 abstract class RoutesManager {
    static const String loginscreen = "/loginsceen";
    static const String registerscreen = "/registerscreen";
+   static const String mainlayout = "/mainlayout";
 
 static Route ? getRoute(RouteSettings settings){
   switch(settings.name){
@@ -16,6 +18,9 @@ static Route ? getRoute(RouteSettings settings){
     }
     case RoutesManager.loginscreen :{
       return MaterialPageRoute(builder: (context)=> LoginScreen());
+    }
+    case RoutesManager.mainlayout :{
+      return MaterialPageRoute(builder: (context)=> MainLayout());
     }
   }
 }

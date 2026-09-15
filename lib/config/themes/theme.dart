@@ -5,6 +5,14 @@ import 'package:flutter/material.dart';
 class ThemeManager{
   static ThemeData light = ThemeData(
     scaffoldBackgroundColor: ColorsManager.whitef4,
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: ColorsManager.white,
+      type: BottomNavigationBarType.fixed,
+      selectedItemColor: ColorsManager.darkBlue,
+      unselectedItemColor: ColorsManager.darkgrey,
+      showSelectedLabels:true ,
+      showUnselectedLabels: true,
+    ),
     inputDecorationTheme: InputDecorationThemeData(
       enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
