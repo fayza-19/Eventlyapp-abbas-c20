@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../models/event_model.dart';
 import '../colors_manager.dart';
+import '../extensions/date_time_ex.dart';
 class EventItem extends StatelessWidget {
   EventItem({super.key, required this.event});
   EventModel event;
@@ -25,7 +26,7 @@ class EventItem extends StatelessWidget {
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text("date", style:Theme.of(context).textTheme.headlineSmall),
+                child: Text(event.date.showMonthWeekDay, style:Theme.of(context).textTheme.headlineSmall),
               ),
             ),
             Spacer(),

@@ -1,6 +1,6 @@
 
-import 'package:evently/core/assets_manager.dart';
 import 'package:flutter/material.dart';
+
 import '../../../core/colors_manager.dart';
 import '../../../core/widgets/custometabbar.dart';
 import '../../../core/widgets/event_item.dart';
@@ -16,6 +16,7 @@ class Hometab extends StatefulWidget {
 
 class _HomeState extends State<Hometab> {
   int selectedIndex = 0;
+  late CategoryModel selectedCategory = CategoryModel.categories.first;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,7 @@ class _HomeState extends State<Hometab> {
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
                       Text(
-                        "zoza",
+                        "Muhammed Saad",
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ],
@@ -58,15 +59,18 @@ class _HomeState extends State<Hometab> {
                 ],
               ),
               SizedBox(height: 12,),
-              CustomTabBar(
-                categories:   [CategoryModel(id: "1", name: "All", icon: Icons.all_inclusive, image: ImageAssets.Meeting),...CategoryModel.categories, ],
-
-
-                selectedBgColor: ColorsManager.darkBlue,
-                selectedFgColor: ColorsManager.white,
-                unSelectedBgColor: ColorsManager.white,
-                unSelectedFgColor: ColorsManager.black,
-              ),
+        CustomTabBar(
+          categories: CategoryModel.categories,
+          selectedBgColor: ColorsManager.darkBlue,
+          selectedFgColor: ColorsManager.white,
+          unSelectedBgColor: ColorsManager.white,
+          unSelectedFgColor: ColorsManager.black,
+          onCategorySelected: (category) {
+            setState(() {
+              selectedCategory = category;
+            });
+          },
+        ),
               Expanded(child: ListView.separated(
                   padding: EdgeInsets.only(top: 16),
                   itemBuilder: (context,index)=>EventItem(event: EventModel(id: 1, category: CategoryModel.categories[0], title: "Meeting for Updating The Development Method ", description: "Meeting for Updating The Development Method ", date: DateTime.now(), time: TimeOfDay.now()),),

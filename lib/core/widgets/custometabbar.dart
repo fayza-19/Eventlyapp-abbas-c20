@@ -1,33 +1,43 @@
-import 'package:evently/models/categorymodel.dart';
 import 'package:flutter/material.dart';
 
+import '../../models/categorymodel.dart';
 import 'customeTabitems.dart';
 
 class CustomTabBar extends StatefulWidget {
-  CustomTabBar({super.key, required this.categories, required this.selectedBgColor, required this.selectedFgColor, required this.unSelectedBgColor, required this.unSelectedFgColor});
-  List<CategoryModel> categories;
+  CustomTabBar({
+    super.key,
+    required this.categories,
+    required this.selectedBgColor,
+    required this.selectedFgColor,
+    required this.unSelectedBgColor,
+    required this.unSelectedFgColor,
+    required this.onCategorySelected,
+  });
 
+  List<CategoryModel> categories;
   Color selectedBgColor;
   Color unSelectedBgColor;
   Color selectedFgColor;
   Color unSelectedFgColor;
+  final ValueChanged<CategoryModel> onCategorySelected; // جديد
 
   @override
   State<CustomTabBar> createState() => _CustomTabBarState();
 }
 
 class _CustomTabBarState extends State<CustomTabBar> {
-
   int selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
-    return  DefaultTabController(
+    return DefaultTabController(
       length: widget.categories.length,
       child: TabBar(
-        onTap: (newIndex){
+        onTap: (newIndex) {
           setState(() {
             selectedIndex = newIndex;
           });
+          widget.onCategorySelected(widget.categories[newIndex]); // جديد
         },
         tabAlignment: TabAlignment.start,
         indicatorColor: Colors.transparent,
@@ -37,10 +47,10 @@ class _CustomTabBarState extends State<CustomTabBar> {
             .map(
               (category) => CustomTabItem(
             category: category,
-            selectedBgColor:widget.selectedBgColor,
+            selectedBgColor: widget.selectedBgColor,
             selectedFgColor: widget.selectedFgColor,
             unSelectedBgColor: widget.unSelectedBgColor,
-            unSelectedFgColor:widget.unSelectedFgColor,
+            unSelectedFgColor: widget.unSelectedFgColor,
             isSelected: widget.categories.indexOf(category) == selectedIndex,
           ),
         )

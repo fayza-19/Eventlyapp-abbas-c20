@@ -27,7 +27,7 @@ class CategoryModel{
     CategoryModel(id: "2", name: "Book Club", icon: Icons.bookmark,image: ImageAssets.BookClub),
     CategoryModel(id: "3", name: "Birthday", icon: Icons.cake_rounded,image: ImageAssets.Birthday),
     CategoryModel(id: "4", name: "Meeting", icon: Icons.laptop_chromebook,image: ImageAssets.Meeting),
-    CategoryModel(id: "5", name: "Exhibition", icon: Icons.water_drop_rounded,image: ImageAssets.Birthday),
+    CategoryModel(id: "5", name: "Exhibition", icon: Icons.water_drop_rounded,image: ImageAssets.Exhibition),
 
   ];
 }

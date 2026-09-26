@@ -3,6 +3,8 @@ import 'package:evently/features/main_layout/tabs/hometab.dart';
 import 'package:evently/features/main_layout/tabs/profiletab.dart';
 import 'package:flutter/material.dart';
 
+import '../../core/routes_manager.dart';
+
 class MainLayout extends StatefulWidget {
   const MainLayout ({super.key});
 
@@ -21,6 +23,11 @@ class _MainLayoutState extends State<MainLayout> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: tabs[TappedIndex],
+      floatingActionButton: FloatingActionButton(
+
+        onPressed: (){
+          Navigator.pushNamed(context, RoutesManager.createEvent);
+        }, child: Icon(Icons.add),),
       bottomNavigationBar: _buildBottomnavbar,
     );
   }

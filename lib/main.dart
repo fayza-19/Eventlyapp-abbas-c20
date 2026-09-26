@@ -20,8 +20,7 @@ class Evently extends StatelessWidget {
       theme:ThemeManager.light ,
       darkTheme: ThemeManager.dark,
       themeMode: ThemeMode.light
-      ,
-      locale: Locale('en'),
+      , locale: Locale('en'),
 
     );
   }
