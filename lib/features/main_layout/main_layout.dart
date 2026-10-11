@@ -4,6 +4,7 @@ import 'package:evently/features/main_layout/tabs/profiletab.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/routes_manager.dart';
+import '../../l10n/app_localizations.dart';
 
 class MainLayout extends StatefulWidget {
   const MainLayout ({super.key});
@@ -42,9 +43,9 @@ class _MainLayoutState extends State<MainLayout> {
         currentIndex: TappedIndex ,
         onTap: _onTap,
         items: [
-          BottomNavigationBarItem(icon: Icon(TappedIndex == 0 ? Icons.home : Icons.home_outlined),label:"Home" ),
-          BottomNavigationBarItem(icon:Icon(TappedIndex == 1 ? Icons.favorite : Icons.favorite_outline) ,label:"Favorite" ),
-          BottomNavigationBarItem(icon:Icon(TappedIndex == 2? Icons.person_2 : Icons.person_2_outlined ) ,label:"Profile" ),
+          BottomNavigationBarItem(icon: Icon(TappedIndex == 0 ? Icons.home : Icons.home_outlined),label:AppLocalizations.of(context)!.home ),
+          BottomNavigationBarItem(icon:Icon(TappedIndex == 1 ? Icons.favorite : Icons.favorite_outline) ,label:AppLocalizations.of(context)!.favourite ),
+          BottomNavigationBarItem(icon:Icon(TappedIndex == 2? Icons.person_2 : Icons.person_2_outlined ) ,label:AppLocalizations.of(context)!.profile ),
 
         ]);
   }

@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../core/assets_manager.dart';
 import '../../../core/colors_manager.dart';
+import '../../../l10n/app_localizations.dart';
+import '../../../providers/lang_provider.dart';
+import '../../../providers/theme_provider.dart';
 class Profiletab extends StatelessWidget {
   const Profiletab({super.key});
   @override
   Widget build(BuildContext context) {
+    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
+    LangProvider langProvider = Provider.of<LangProvider>(context);
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 38, horizontal: 8),
@@ -22,12 +28,19 @@ class Profiletab extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  Text("Dark Mode", style: Theme.of(context).textTheme.labelMedium,),
+                  Text(AppLocalizations.of(context)!.dark_mode, style: Theme.of(context).textTheme.labelMedium,),
                   Spacer(),
                   Switch(
                       activeColor: ColorsManager.darkBlue,
 
-                      value: false, onChanged: (isDarkEnabled){})
+                      value: themeProvider.isDark,
+                      onChanged: (isDarkEnabled){
+                    if (isDarkEnabled) {
+                      themeProvider.changeAppTheme(ThemeMode.dark);
+                    }else{
+                      themeProvider.changeAppTheme(ThemeMode.light);
+                    }
+                  })
                 ],
               ),
             )),
@@ -36,7 +49,7 @@ class Profiletab extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  Text("Language", style: Theme.of(context).textTheme.labelMedium,),
+                  Text(AppLocalizations.of(context)!.language, style: Theme.of(context).textTheme.labelMedium,),
                   Spacer(),
 
                   DropdownButton(
@@ -44,6 +57,11 @@ class Profiletab extends StatelessWidget {
                     underline: Container(),
                     items: ["English", "Arabic"].map((val)=>DropdownMenuItem(value: val,child: Text(val))).toList(),
                     onChanged: (newLang) {
+                      if(newLang == "English"){
+                        langProvider.changeAppLang('en');
+                      }else{
+                        langProvider.changeAppLang('ar');
+                      }
                                          },
                   )
 
@@ -56,7 +74,7 @@ class Profiletab extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Row(
                 children: [
-                  Text("Logout", style: Theme.of(context).textTheme.labelMedium,),
+                  Text(AppLocalizations.of(context)!.logout, style: Theme.of(context).textTheme.labelMedium,),
                   Spacer(),
 
 

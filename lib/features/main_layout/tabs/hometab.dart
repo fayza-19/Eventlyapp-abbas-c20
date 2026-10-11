@@ -1,11 +1,15 @@
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/colors_manager.dart';
 import '../../../core/widgets/custometabbar.dart';
 import '../../../core/widgets/event_item.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../models/categorymodel.dart';
 import '../../../models/event_model.dart';
+import '../../../providers/lang_provider.dart';
+import '../../../providers/theme_provider.dart';
 
 class Hometab extends StatefulWidget {
   const Hometab({super.key});
@@ -16,11 +20,12 @@ class Hometab extends StatefulWidget {
 
 class _HomeState extends State<Hometab> {
   int selectedIndex = 0;
-  late CategoryModel selectedCategory = CategoryModel.categories.first;
+  late CategoryModel selectedCategory = CategoryModel.getCategories(context).first;
 
   @override
   Widget build(BuildContext context) {
-
+    LangProvider langProvider =Provider.of<LangProvider>(context);
+    ThemeProvider themeProvider =Provider.of<ThemeProvider>(context);
     return Container(
       child: SafeArea(
         child: Padding(
@@ -32,35 +37,46 @@ class _HomeState extends State<Hometab> {
                   Column(
                     children: [
                       Text(
-                        "Welcome Back ✨",
+                        AppLocalizations.of(context)!.welcome_back,
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
                       Text(
-                        "Muhammed Saad",
+                        "ZOZA",
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ],
                   ),
                   Spacer(),
-                  Icon(Icons.light_mode_rounded),
+                  IconButton(onPressed: (){
+                    themeProvider.changeAppTheme(themeProvider.isDark ? ThemeMode.light : ThemeMode.dark);
+                  }, icon:  Icon(themeProvider.isDark ? Icons.light_mode : Icons.dark_mode_outlined)),
                   SizedBox(width: 8,),
-                  Card(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 6,
-                        horizontal: 8,
-                      ),
-                      child: Text(
-                          "En",
-                          style: Theme.of(context).textTheme.bodyLarge
+                  InkWell(
+                    onTap: (){
+
+                      langProvider.changeAppLang(langProvider.isEnglish?'ar':'en');
+
+                    },
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 6,
+                          horizontal: 8,
+                        ),
+                        child: Text(
+                            langProvider.isEnglish ?  "Ar" : "En",
+                            style: Theme.of(context).textTheme.bodyLarge
+                        ),
                       ),
                     ),
                   ),
                 ],
               ),
+
+
               SizedBox(height: 12,),
         CustomTabBar(
-          categories: CategoryModel.categories,
+          categories: CategoryModel.getCategories(context),
           selectedBgColor: ColorsManager.darkBlue,
           selectedFgColor: ColorsManager.white,
           unSelectedBgColor: ColorsManager.white,
@@ -73,7 +89,7 @@ class _HomeState extends State<Hometab> {
         ),
               Expanded(child: ListView.separated(
                   padding: EdgeInsets.only(top: 16),
-                  itemBuilder: (context,index)=>EventItem(event: EventModel(id: 1, category: CategoryModel.categories[0], title: "Meeting for Updating The Development Method ", description: "Meeting for Updating The Development Method ", date: DateTime.now(), time: TimeOfDay.now()),),
+                  itemBuilder: (context,index)=>EventItem(event: EventModel(id: 1, category: CategoryModel.getCategories(context)[0], title: "Meeting for Updating The Development Method ", description: "Meeting for Updating The Development Method ", date: DateTime.now(), time: TimeOfDay.now()),),
                   separatorBuilder: (context, index)=>SizedBox(height: 8,),
                   itemCount: 20))
             ],

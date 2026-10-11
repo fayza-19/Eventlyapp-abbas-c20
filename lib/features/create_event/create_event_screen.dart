@@ -7,6 +7,7 @@ import '../../core/colors_manager.dart';
 import '../../core/extensions/date_time_ex.dart';
 import '../../core/widgets/custom_text_button.dart';
 import '../../core/widgets/custometabbar.dart';
+import '../../l10n/app_localizations.dart';
 import '../../models/categorymodel.dart';
 
 class CreateEventScreen extends StatefulWidget {
@@ -20,7 +21,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
   DateTime currentDateTime = DateTime.now();
   TimeOfDay currentTime = TimeOfDay.now();
 
-  late CategoryModel selectedCategory = CategoryModel.categories.first;
+  late CategoryModel selectedCategory = CategoryModel.getCategories(context).first;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +45,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
             ),
             SizedBox(height: 16),
             CustomTabBar(
-              categories: CategoryModel.categories,
+              categories: CategoryModel.getCategories(context),
               selectedBgColor: ColorsManager.darkBlue,
               selectedFgColor: ColorsManager.white,
               unSelectedBgColor: ColorsManager.white,
@@ -56,16 +57,16 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
               },
             ),
             SizedBox(height: 16),
-            Text("Title", style: Theme.of(context).textTheme.displaySmall),
+            Text(AppLocalizations.of(context)!.title, style: Theme.of(context).textTheme.displaySmall),
             SizedBox(height: 8),
-            Custometext(hinttext: "Event title"),
+            Custometext(hinttext: AppLocalizations.of(context)!.event_title),
             SizedBox(height: 16),
             Text(
-              "Description",
+              AppLocalizations.of(context)!.description,
               style: Theme.of(context).textTheme.displaySmall,
             ),
             SizedBox(height: 8),
-            Custometext(hinttext: "Event Description...", lines: 4),
+            Custometext(hinttext: AppLocalizations.of(context)!.event_description, lines: 4),
             SizedBox(height: 16),
             Row(
               children: [
@@ -76,7 +77,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
                 Spacer(),
-                CustomTextButton(text: "Choose Date", ontap: _chooseEventDate),
+                CustomTextButton(text: AppLocalizations.of(context)!.choose_date, ontap: _chooseEventDate),
               ],
             ),
             SizedBox(height: 16),
@@ -89,12 +90,12 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
                 Spacer(),
-                CustomTextButton(text: "Choose Time", ontap: _chooseEventTime),
+                CustomTextButton(text: AppLocalizations.of(context)!.choose_time, ontap: _chooseEventTime),
               ],
             ),
 
             Spacer(),
-            CustomElevatedButtom(title: "Add Event", onpress: () {}),
+            CustomElevatedButtom(title:AppLocalizations.of(context)!.add_event, onpress: () {}),
           ],
         ),
       ),
