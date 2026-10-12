@@ -5,6 +5,7 @@ import 'package:evently/features/auth/register/register_screen.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/providers/lang_provider.dart';
 import 'package:evently/providers/theme_provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +13,8 @@ import 'core/prefsmanager/prefesmanager.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await  PrefsManager.init();
+  await  Firebase.initializeApp();
+
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (context) => ThemeProvider()),

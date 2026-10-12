@@ -1,11 +1,14 @@
 import 'package:evently/core/routes_manager.dart';
 import 'package:evently/core/vaildator/validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/assets_manager.dart';
+import '../../../core/utils/dialogutils.dart';
 import '../../../core/widgets/custom_elevated_buttom.dart';
 import '../../../core/widgets/custom_text_button.dart';
 import '../../../core/widgets/custometext.dart';
+import '../../../firebase_services/firebaseservices.dart';
 import '../../../l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -75,7 +78,23 @@ class _LoginScreenState extends State<LoginScreen> {
 
     );
   }
-  void login() {
+  void login() async{
     if (formkey.currentState!.validate() == false) return;
+    try{
+      DialogUtils.showLoading(context, dismissible: false);
+      UserCredential userCredential = await FirebaseServices.login(email: emailcontroller.text, password: passcontroller.text);
+
+      DialogUtils.hideDialog(context);
+      DialogUtils.showToast("User Logged-In Successfully", Colors.green);
+      Navigator.pushReplacementNamed(context, RoutesManager.mainlayout);
+    }on FirebaseAuthException catch(exception){
+      DialogUtils.hideDialog(context);
+      DialogUtils.showDialogMessage(context, message: "Wrong email or password.",posTitle: "Try again",);
+    }catch(exception){
+      DialogUtils.hideDialog(context);
+      DialogUtils.showDialogMessage(context, message: exception.toString(),posTitle: "Try again",);
+    }
+
+
   }
 }

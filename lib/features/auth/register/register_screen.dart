@@ -1,13 +1,13 @@
 import 'package:evently/core/assets_manager.dart';
-import 'package:evently/core/colors_manager.dart';
 import 'package:evently/core/vaildator/validator.dart';
 import 'package:evently/core/widgets/custom_elevated_buttom.dart';
 import 'package:evently/core/widgets/custometext.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../../core/routes_manager.dart';
+import '../../../core/utils/dialogutils.dart';
 import '../../../core/widgets/custom_text_button.dart';
+import '../../../firebase_services/firebaseservices.dart';
 import '../../../l10n/app_localizations.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -99,8 +99,33 @@ GlobalKey<FormState> formkey = GlobalKey<FormState>();
     );
   }
 
-  void _createAccount() {
+  void _createAccount() async{
  if (formkey.currentState!.validate() == false) return;
+ try {
+   DialogUtils.showLoading(context, dismissible: false);
+   UserCredential userCredential = await FirebaseServices.createAccount(email: emailcontroller.text, password: passcontroller.text);
+   DialogUtils.hideDialog(context);
+   DialogUtils.showToast("User Registered Successfully", Colors.green);
+   Navigator.pushReplacementNamed(context, RoutesManager.loginscreen);
+ } on FirebaseAuthException catch (exception) {
+   DialogUtils.hideDialog(context);
+   if (exception.code == 'weak-password') {
+     DialogUtils.showDialogMessage(context, message: "The password provided is too weak.", posTitle: "Try again", posAction: (){
+       Navigator.pop(context);
+     });
 
+   } else if (exception.code == "email-already-in-use") {
+     DialogUtils.showDialogMessage(context, message: "The account already exists for that email.", posTitle: "Try again", posAction: (){
+       Navigator.pop(context);
+     });
+
+   }
+ } catch (exception) {
+   DialogUtils.hideDialog(context);
+   DialogUtils.showDialogMessage(context, message: exception.toString(), posTitle: "Try again", posAction: (){
+     Navigator.pop(context);
+   });
+
+ }
   }
 }
