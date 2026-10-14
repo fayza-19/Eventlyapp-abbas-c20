@@ -31,7 +31,7 @@ class Evently extends StatelessWidget {
     LangProvider langProvider = Provider.of<LangProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: RoutesManager.registerscreen,
+      initialRoute: RoutesManager.onboarding,
       onGenerateRoute: RoutesManager.getRoute,
       theme:ThemeManager.light ,
       darkTheme: ThemeManager.dark,

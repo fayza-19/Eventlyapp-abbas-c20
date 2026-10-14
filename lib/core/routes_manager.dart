@@ -2,6 +2,7 @@
 
 import 'package:evently/features/create_event/create_event_screen.dart';
 import 'package:evently/features/main_layout/main_layout.dart';
+import 'package:evently/features/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../features/auth/login/login_screen.dart';
@@ -12,6 +13,8 @@ abstract class RoutesManager {
    static const String registerscreen = "/registerscreen";
    static const String mainlayout = "/mainlayout";
    static const String createEvent = "/createEvent";
+   static const String onboarding = "/onboarding";
+
 
 
    static Route ? getRoute(RouteSettings settings){
@@ -27,6 +30,9 @@ abstract class RoutesManager {
     }
     case RoutesManager.mainlayout :{
       return MaterialPageRoute(builder: (context)=> MainLayout());
+    }
+    case RoutesManager.onboarding :{
+      return MaterialPageRoute(builder: (context)=> OnboardingScreen());
     }
   }
 }

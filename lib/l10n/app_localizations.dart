@@ -337,6 +337,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Password doesn\'t match'**
   String get password_dont_match;
+
+  /// No description provided for @obTitle1.
+  ///
+  /// In en, this message translates to:
+  /// **'Personalize Your Experience'**
+  String get obTitle1;
+
+  /// No description provided for @obDesc1.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your preferred theme and language to get started with a comfortable, tailored experience that suits your style.'**
+  String get obDesc1;
+
+  /// No description provided for @obTitle2.
+  ///
+  /// In en, this message translates to:
+  /// **'Find Events That Inspire You'**
+  String get obTitle2;
+
+  /// No description provided for @obDesc2.
+  ///
+  /// In en, this message translates to:
+  /// **'Dive into a world of events crafted to fit your unique interests. Whether you\'re into live music, art workshops, professional networking, or simply discovering new experiences, we have something for everyone. Our curated recommendations will help you explore, connect, and make the most of every opportunity around you.'**
+  String get obDesc2;
+
+  /// No description provided for @obTitle3.
+  ///
+  /// In en, this message translates to:
+  /// **'Effortless Event Planning'**
+  String get obTitle3;
+
+  /// No description provided for @obDesc3.
+  ///
+  /// In en, this message translates to:
+  /// **'Take the hassle out of organizing events with our all-in-one planning tools. From setting up invites and managing RSVPs to scheduling reminders and coordinating details, we’ve got you covered. Plan with ease and focus on what matters – creating an unforgettable experience for you and your guests.'**
+  String get obDesc3;
+
+  /// No description provided for @obTitle4.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect with Friends & Share Moments'**
+  String get obTitle4;
+
+  /// No description provided for @obDesc4.
+  ///
+  /// In en, this message translates to:
+  /// **'Make every event memorable by sharing the experience with others. Our platform lets you invite friends, keep everyone in the loop, and celebrate moments together. Capture and share the excitement with your network, so you can relive the highlights and cherish the memories.'**
+  String get obDesc4;
+
+  /// No description provided for @obLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get obLanguage;
+
+  /// No description provided for @obTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get obTheme;
+
+  /// No description provided for @obEnglish.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get obEnglish;
+
+  /// No description provided for @obArabic.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic'**
+  String get obArabic;
+
+  /// No description provided for @obLetsStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Let’s start'**
+  String get obLetsStart;
+
+  /// No description provided for @obGetStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Get started'**
+  String get obGetStarted;
+
+  /// No description provided for @obNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get obNext;
+
+  /// No description provided for @obSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get obSkip;
 }
 
 class _AppLocalizationsDelegate

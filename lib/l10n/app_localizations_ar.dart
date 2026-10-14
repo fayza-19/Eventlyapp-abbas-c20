@@ -127,4 +127,56 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get password_dont_match => 'كلمه السر ليست متطابقه ';
+
+  @override
+  String get obTitle1 => 'خصّص تجربتك';
+
+  @override
+  String get obDesc1 =>
+      'اختر الثيم واللغة المفضلين لديك لتبدأ تجربة مريحة ومصمّمة بما يناسب ذوقك.';
+
+  @override
+  String get obTitle2 => 'اكتشف فعاليات تلهمك';
+
+  @override
+  String get obDesc2 =>
+      'انطلق إلى عالم من الفعاليات المصممة لتناسب اهتماماتك الخاصة. سواء كنت تحب الموسيقى الحية، أو ورش الفن، أو التواصل المهني، أو اكتشاف تجارب جديدة، لدينا ما يناسب الجميع. ستساعدك توصياتنا المختارة على الاستكشاف والتواصل والاستفادة من كل فرصة حولك.';
+
+  @override
+  String get obTitle3 => 'تنظيم فعاليات بلا عناء';
+
+  @override
+  String get obDesc3 =>
+      'تخلّص من متاعب تنظيم الفعاليات مع أدوات التخطيط المتكاملة لدينا. من إرسال الدعوات وإدارة الردود إلى جدولة التذكيرات وتنسيق التفاصيل، نحن نوفر لك كل ما تحتاجه. خطّط بسهولة وركّز على ما يهم، وهو صنع تجربة لا تُنسى لك ولضيوفك.';
+
+  @override
+  String get obTitle4 => 'تواصل مع أصدقائك وشارك اللحظات';
+
+  @override
+  String get obDesc4 =>
+      'اجعل كل فعالية لا تُنسى بمشاركة التجربة مع الآخرين. تتيح لك منصتنا دعوة الأصدقاء وإبقاء الجميع على اطلاع والاحتفال باللحظات معًا. شارك الحماس مع شبكتك لتعيش أجمل اللحظات من جديد وتحتفظ بالذكريات.';
+
+  @override
+  String get obLanguage => 'اللغة';
+
+  @override
+  String get obTheme => 'المظهر';
+
+  @override
+  String get obEnglish => 'الإنجليزية';
+
+  @override
+  String get obArabic => 'العربية';
+
+  @override
+  String get obLetsStart => 'لنبدأ';
+
+  @override
+  String get obGetStarted => 'ابدأ الآن';
+
+  @override
+  String get obNext => 'التالي';
+
+  @override
+  String get obSkip => 'تخطي';
 }
