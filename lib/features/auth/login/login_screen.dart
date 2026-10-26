@@ -6,10 +6,12 @@ import 'package:flutter/material.dart';
 import '../../../core/assets_manager.dart';
 import '../../../core/utils/dialogutils.dart';
 import '../../../core/widgets/custom_elevated_buttom.dart';
+import '../../../core/widgets/custom_google_login_button.dart';
 import '../../../core/widgets/custom_text_button.dart';
 import '../../../core/widgets/custometext.dart';
 import '../../../firebase_services/firebaseservices.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../models/user_model.dart';
 
 class LoginScreen extends StatefulWidget {
    LoginScreen({super.key});
@@ -68,7 +70,23 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.pushReplacementNamed(context, RoutesManager.registerscreen);
                     })
                   ],
-                )
+                ),
+                SizedBox(height: 24,),
+                Center(
+                  child: Text(
+                    AppLocalizations.of(context)!.or,
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                ),
+                SizedBox(height: 24,),
+                CustomGoogleLoginButton(
+                  title: AppLocalizations.of(context)!.login_with_google,
+                  onpress:
+                    loginWithGoogle
+                  ,
+                ),
+
+
 
               ],
             ),
@@ -83,7 +101,8 @@ class _LoginScreenState extends State<LoginScreen> {
     try{
       DialogUtils.showLoading(context, dismissible: false);
       UserCredential userCredential = await FirebaseServices.login(email: emailcontroller.text, password: passcontroller.text);
-
+      UserModel user = await  FirebaseServices.getUserFromFireStore(userCredential.user!.uid);
+      UserModel.loggedInUser = user;
       DialogUtils.hideDialog(context);
       DialogUtils.showToast("User Logged-In Successfully", Colors.green);
       Navigator.pushReplacementNamed(context, RoutesManager.mainlayout);
@@ -96,5 +115,23 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
 
+  }
+  void loginWithGoogle() async {
+    try {
+      DialogUtils.showLoading(context, dismissible: false);
+      final user = await FirebaseServices.signInWithGoogle();
+      DialogUtils.hideDialog(context);
+      if (user == null) return; // لغى الاختيار
+      UserModel.loggedInUser = user;
+      DialogUtils.showToast("User Logged-In Successfully", Colors.green);
+      Navigator.pushReplacementNamed(context, RoutesManager.mainlayout);
+    } catch (exception) {
+      DialogUtils.hideDialog(context);
+      DialogUtils.showDialogMessage(
+        context,
+        message: exception.toString(),
+        posTitle: "Try again",
+      );
+    }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:evently/core/assets_manager.dart';
+import 'package:evently/core/prefsmanager/prefesmanager.dart';
 import 'package:evently/core/routes_manager.dart';
 import 'package:evently/core/widgets/custom_elevated_buttom.dart';
 import 'package:evently/l10n/app_localizations.dart';
@@ -49,9 +50,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   void finishOnboarding() {
+    PrefsManager.setOnboardingSeen();
     Navigator.pushReplacementNamed(context, RoutesManager.loginscreen);
   }
-
   @override
   void dispose() {
     controller.dispose();

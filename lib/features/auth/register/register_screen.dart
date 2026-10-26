@@ -6,9 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../../core/routes_manager.dart';
 import '../../../core/utils/dialogutils.dart';
+import '../../../core/widgets/custom_google_login_button.dart';
 import '../../../core/widgets/custom_text_button.dart';
 import '../../../firebase_services/firebaseservices.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../models/user_model.dart';
 
 class RegisterScreen extends StatefulWidget {
    RegisterScreen({super.key });
@@ -85,10 +87,22 @@ GlobalKey<FormState> formkey = GlobalKey<FormState>();
                     Text( AppLocalizations.of(context)!.already_have_an_account, style: Theme.of(context).textTheme.bodySmall,)
                     ,CustomTextButton(text: AppLocalizations.of(context)!.login, ontap: (){
                       Navigator.pushReplacementNamed(context, RoutesManager.loginscreen);
-
                     })
                   ],
-                )
+                ),
+                SizedBox(height: 24,),
+                Center(
+                  child: Text(
+                    AppLocalizations.of(context)!.or,
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                ),
+                SizedBox(height: 24,),
+                CustomGoogleLoginButton(
+                  title: AppLocalizations.of(context)!.sign_up_with_google,
+                  onpress:
+                    signUpWithGoogle,
+                ),
 
                 ],
             ),
@@ -104,6 +118,8 @@ GlobalKey<FormState> formkey = GlobalKey<FormState>();
  try {
    DialogUtils.showLoading(context, dismissible: false);
    UserCredential userCredential = await FirebaseServices.createAccount(email: emailcontroller.text, password: passcontroller.text);
+   UserModel user = UserModel(id: userCredential.user!.uid, name: namecontroller.text, email: emailcontroller.text);
+   await FirebaseServices.addUserToFireStore(user);
    DialogUtils.hideDialog(context);
    DialogUtils.showToast("User Registered Successfully", Colors.green);
    Navigator.pushReplacementNamed(context, RoutesManager.loginscreen);
@@ -128,4 +144,22 @@ GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
  }
   }
+   void signUpWithGoogle() async {
+     try {
+       DialogUtils.showLoading(context, dismissible: false);
+       final user = await FirebaseServices.signInWithGoogle();
+       DialogUtils.hideDialog(context);
+       if (user == null) return;
+       UserModel.loggedInUser = user;
+       DialogUtils.showToast("User Registered Successfully", Colors.green);
+       Navigator.pushReplacementNamed(context, RoutesManager.mainlayout);
+     } catch (exception) {
+       DialogUtils.hideDialog(context);
+       DialogUtils.showDialogMessage(
+         context,
+         message: exception.toString(),
+         posTitle: "Try again",
+       );
+     }
+   }
 }

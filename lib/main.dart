@@ -5,16 +5,21 @@ import 'package:evently/features/auth/register/register_screen.dart';
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/providers/lang_provider.dart';
 import 'package:evently/providers/theme_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'core/prefsmanager/prefesmanager.dart';
+import 'firebase_services/firebaseservices.dart';
+import 'models/user_model.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await  PrefsManager.init();
   await  Firebase.initializeApp();
-
+  if(FirebaseAuth.instance.currentUser != null){
+    UserModel.loggedInUser = await FirebaseServices.getUserFromFireStore(FirebaseAuth.instance.currentUser!.uid);
+  }
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (context) => ThemeProvider()),
@@ -31,7 +36,10 @@ class Evently extends StatelessWidget {
     LangProvider langProvider = Provider.of<LangProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: RoutesManager.onboarding,
+      initialRoute: RoutesManager.loginscreen,
+      // PrefsManager.isOnboardingSeen()
+      //   ? RoutesManager.loginscreen
+      //   : RoutesManager.onboarding,
       onGenerateRoute: RoutesManager.getRoute,
       theme:ThemeManager.light ,
       darkTheme: ThemeManager.dark,

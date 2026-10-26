@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/assets_manager.dart';
 import '../../../core/colors_manager.dart';
+import '../../../core/routes_manager.dart';
+import '../../../firebase_services/firebaseservices.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../models/user_model.dart';
 import '../../../providers/lang_provider.dart';
 import '../../../providers/theme_provider.dart';
 class Profiletab extends StatelessWidget {
@@ -21,8 +24,10 @@ class Profiletab extends StatelessWidget {
             ),
             Image.asset(ImageAssets.Profilepic),
             SizedBox(height: 16,),
-            Text("Fayza tarek", style: Theme.of(context).textTheme.headlineMedium,)
-            ,Text("Zoza@gmail.com", style: Theme.of(context).textTheme.labelSmall,)
+            Text(UserModel.loggedInUser!.name,
+                 style: Theme.of(context).textTheme.headlineMedium,)
+            ,Text(UserModel.loggedInUser!.email,
+          style: Theme.of(context).textTheme.labelSmall,)
             ,SizedBox(height: 32,),
             Card(child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -70,21 +75,28 @@ class Profiletab extends StatelessWidget {
               ),
             )),
             SizedBox(height: 16,),
-            Card(child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                children: [
-                  Text(AppLocalizations.of(context)!.logout, style: Theme.of(context).textTheme.labelMedium,),
-                  Spacer(),
+            InkWell(
+              onTap: ()async{
+                await FirebaseServices.logOut();
+                Navigator.pushReplacementNamed(context, RoutesManager.loginscreen);
+              },
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        AppLocalizations.of(context)!.logout,
+                        style: Theme.of(context).textTheme.labelMedium,
+                      ),
+                      Spacer(),
 
-
-                  Icon(Icons.logout)
-
-
-                ],
+                      Icon(Icons.logout),
+                    ],
+                  ),
+                ),
               ),
-            )),
-          ],
+            ),          ],
         ),
       ),
     );

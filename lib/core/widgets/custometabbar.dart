@@ -12,6 +12,7 @@ class CustomTabBar extends StatefulWidget {
     required this.unSelectedBgColor,
     required this.unSelectedFgColor,
     required this.onCategorySelected,
+
   });
 
   List<CategoryModel> categories;
@@ -20,6 +21,7 @@ class CustomTabBar extends StatefulWidget {
   Color selectedFgColor;
   Color unSelectedFgColor;
   final ValueChanged<CategoryModel> onCategorySelected; // جديد
+  void Function(CategoryModel)? onSelectedCategoryClicked;
 
   @override
   State<CustomTabBar> createState() => _CustomTabBarState();

@@ -55,7 +55,9 @@
   "obLetsStart": "Let’s start",
   "obGetStarted": "Get started",
   "obNext": "Next",
-  "obSkip": "Skip"
-
+  "obSkip": "Skip",
+  "or": "Or",
+  "login_with_google": "Login with Google",
+  "sign_up_with_google": "Sign up with Google"
 
 }

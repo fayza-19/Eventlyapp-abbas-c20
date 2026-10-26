@@ -179,4 +179,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get obSkip => 'تخطي';
+
+  @override
+  String get sign_up_with_google => 'إنشاء حساب باستخدام جوجل';
 }

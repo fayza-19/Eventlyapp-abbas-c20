@@ -26,7 +26,7 @@ class EventItem extends StatelessWidget {
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(event.date.showMonthWeekDay, style:Theme.of(context).textTheme.headlineSmall),
+                child: Text(event.dateTime.showMonthWeekDay, style:Theme.of(context).textTheme.headlineSmall),
               ),
             ),
             Spacer(),

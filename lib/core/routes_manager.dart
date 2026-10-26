@@ -34,6 +34,7 @@ abstract class RoutesManager {
     case RoutesManager.onboarding :{
       return MaterialPageRoute(builder: (context)=> OnboardingScreen());
     }
+
   }
 }
 }

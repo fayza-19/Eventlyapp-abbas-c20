@@ -54,6 +54,8 @@
     "obLetsStart": "لنبدأ",
     "obGetStarted": "ابدأ الآن",
     "obNext": "التالي",
-    "obSkip": "تخطي"
-
+    "obSkip": "تخطي",
+    "or": "أو",
+    "login_with_google": "تسجيل الدخول باستخدام جوجل",
+    "sign_up_with_google": "إنشاء حساب باستخدام جوجل"
 }

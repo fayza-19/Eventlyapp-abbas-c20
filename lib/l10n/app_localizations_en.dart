@@ -33,7 +33,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get or => 'Or';
 
   @override
-  String get login_with_google => 'Login with google';
+  String get login_with_google => 'Login with Google';
 
   @override
   String get create_your_account => 'Create your account';
@@ -179,4 +179,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get obSkip => 'Skip';
+
+  @override
+  String get sign_up_with_google => 'Sign up with Google';
 }

@@ -16,6 +16,8 @@ abstract class ImageAssets{
   static const String obscreenthreeDark = "${base}ob3.png";
   static const String obscreenfourDark = "${base}ob4.png";
   static const String logoDark = "${base}logodark.png";
+  static const String google = "${base}google.png";
+
 
 
 

@@ -30,4 +30,11 @@ class PrefsManager {
   static String? getSavedLang(){
     return prefs.getString("currentLang");
   }
+  static void setOnboardingSeen() {
+    prefs.setBool("onboarding_seen", true);
+  }
+
+  static bool isOnboardingSeen() {
+    return prefs.getBool("onboarding_seen") ?? false;
+  }
 }

@@ -34,7 +34,7 @@ class CustomTabItem extends StatelessWidget {
         children: [
           Icon(category.icon,color: isSelected ? selectedFgColor: unSelectedFgColor,),
           SizedBox(width: 8,),
-          Text(category.name,style: TextStyle(color: isSelected ? selectedFgColor:unSelectedFgColor),)
+          Text(category.getName(context),style: TextStyle(color: isSelected ? selectedFgColor:unSelectedFgColor),)
         ],
       ),
     );

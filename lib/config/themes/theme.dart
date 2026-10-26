@@ -74,6 +74,7 @@ class ThemeManager {
 
     iconTheme: IconThemeData(color: ColorsManager.darkBlue),
 
+
     textTheme: TextTheme(
       bodyMedium: TextStyle(
           fontSize: 14, fontWeight: FontWeight.w500,color:  ColorsManager.darkBlue),
@@ -210,6 +211,7 @@ class ThemeManager {
       ),
     ),
     iconTheme: IconThemeData(color: ColorsManager.blue),
+
     textTheme: TextTheme(
       bodyLarge: TextStyle(
         fontSize: 16,

@@ -5,10 +5,14 @@ import 'package:flutter/material.dart';
 import '../../core/assets_manager.dart';
 import '../../core/colors_manager.dart';
 import '../../core/extensions/date_time_ex.dart';
+import '../../core/utils/dialogutils.dart';
 import '../../core/widgets/custom_text_button.dart';
 import '../../core/widgets/custometabbar.dart';
+import '../../firebase_services/firebaseservices.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/categorymodel.dart';
+import '../../models/event_model.dart';
+import '../../models/user_model.dart';
 
 class CreateEventScreen extends StatefulWidget {
   const CreateEventScreen({super.key});
@@ -20,9 +24,24 @@ class CreateEventScreen extends StatefulWidget {
 class _CreateEventScreenState extends State<CreateEventScreen> {
   DateTime currentDateTime = DateTime.now();
   TimeOfDay currentTime = TimeOfDay.now();
+  late TextEditingController titleController;
+  late TextEditingController desController;
 
-  late CategoryModel selectedCategory = CategoryModel.getCategories(context).first;
-
+  late CategoryModel selectedCategory = CategoryModel.categories.first;
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    titleController = TextEditingController();
+    desController = TextEditingController();
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    titleController.dispose();
+    desController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +64,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
             ),
             SizedBox(height: 16),
             CustomTabBar(
-              categories: CategoryModel.getCategories(context),
+              categories: CategoryModel.categories,
               selectedBgColor: ColorsManager.darkBlue,
               selectedFgColor: ColorsManager.white,
               unSelectedBgColor: ColorsManager.white,
@@ -59,14 +78,16 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
             SizedBox(height: 16),
             Text(AppLocalizations.of(context)!.title, style: Theme.of(context).textTheme.displaySmall),
             SizedBox(height: 8),
-            Custometext(hinttext: AppLocalizations.of(context)!.event_title),
+            Custometext( controller: titleController,
+                hinttext: AppLocalizations.of(context)!.event_title),
             SizedBox(height: 16),
             Text(
               AppLocalizations.of(context)!.description,
               style: Theme.of(context).textTheme.displaySmall,
             ),
             SizedBox(height: 8),
-            Custometext(hinttext: AppLocalizations.of(context)!.event_description, lines: 4),
+            Custometext(controller: desController,
+                hinttext: AppLocalizations.of(context)!.event_description, lines: 4),
             SizedBox(height: 16),
             Row(
               children: [
@@ -95,7 +116,8 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
             ),
 
             Spacer(),
-            CustomElevatedButtom(title:AppLocalizations.of(context)!.add_event, onpress: () {}),
+            CustomElevatedButtom(title:AppLocalizations.of(context)!.add_event,
+                onpress: _addEVent),
           ],
         ),
       ),
@@ -129,5 +151,14 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
       minute: currentTime.minute,
     );
     setState(() {});
+  }
+  void _addEVent()async{
+    EventModel event = EventModel(ownerId: UserModel.loggedInUser!.id,id: "", category: selectedCategory, title: titleController.text, description: desController.text, dateTime: currentDateTime);
+    DialogUtils.showLoading(context, dismissible: false);
+    await FirebaseServices.addEventToFireStore(event);
+    DialogUtils.hideDialog(context);
+    DialogUtils.showToast("Event Created", Colors.green);
+    Navigator.pop(context);
+
   }
 }
