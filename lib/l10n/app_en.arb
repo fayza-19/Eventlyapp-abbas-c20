@@ -58,6 +58,13 @@
   "obSkip": "Skip",
   "or": "Or",
   "login_with_google": "Login with Google",
-  "sign_up_with_google": "Sign up with Google"
+  "sign_up_with_google": "Sign up with Google",
+  "edit_event": "Edit event",
+  "update_event": "Update event",
+  "event_details": "Event details",
+  "delete_event": "Delete event",
+  "delete_event_confirmation": "Are you sure you want to delete this event?",
+  "cancel": "Cancel",
+  "delete": "Delete"
 
 }

@@ -99,10 +99,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get choose_date => 'اختر التاريخ';
 
   @override
-  String get event_details => 'تفاصيل الفعالية';
+  String get event_details => 'تفاصيل الحدث';
 
   @override
-  String get update_event => 'تحديث الفعالية';
+  String get update_event => 'تحديث الحدث';
 
   @override
   String get sports => 'رياضة';
@@ -182,4 +182,20 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get sign_up_with_google => 'إنشاء حساب باستخدام جوجل';
+
+  @override
+  String get edit_event => 'تعديل الحدث';
+
+  @override
+  String get delete_event => 'حذف الحدث';
+
+  @override
+  String get delete_event_confirmation =>
+      'هل أنت متأكد أنك تريد حذف هذا الحدث؟';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get delete => 'حذف';
 }

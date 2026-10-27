@@ -17,7 +17,7 @@ class EventModel{
     id:json['id'] ,
     title: json['title'],
     description: json['description'],
-    dateTime: json['dateTime'],
+    dateTime: (json['dateTime'] as Timestamp).toDate(),
     category:CategoryModel.getById(json['categoryId']),
   );
 

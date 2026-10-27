@@ -1,5 +1,5 @@
 
-import 'package:firebase_core/firebase_core.dart';
+import 'package:evently/firebase_services/firebaseservices.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,8 +22,7 @@ class Hometab extends StatefulWidget {
 
 class _HomeState extends State<Hometab> {
   int selectedIndex = 0;
-  late CategoryModel selectedCategory = CategoryModel.categories.first;
-
+  late CategoryModel selectedCategory = CategoryModel.getCategoriesWithAll(context)[0];
   @override
   Widget build(BuildContext context) {
     LangProvider langProvider =Provider.of<LangProvider>(context);
@@ -43,7 +42,7 @@ class _HomeState extends State<Hometab> {
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
                       Text(
-                        UserModel.loggedInUser!.name,
+                        UserModel.currentUser!.name,
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ],
@@ -77,54 +76,51 @@ class _HomeState extends State<Hometab> {
 
 
               SizedBox(height: 12,),
-        CustomTabBar(
-          categories: CategoryModel.categories,
-          selectedBgColor: ColorsManager.darkBlue,
-          selectedFgColor: ColorsManager.white,
-          unSelectedBgColor: ColorsManager.white,
-          unSelectedFgColor: ColorsManager.black,
-          onCategorySelected: (category) {
-            setState(() {
-              selectedCategory = category;
-            });
-          },
-        ),
-              // StreamBuilder(
-              //   stream: FirebaseService.getEventsFromFireStoreRealTime(context,selectedCategory),
-              //   builder: (context, snapshot) {
-              //     if (snapshot.connectionState == ConnectionState.waiting) {
-              //       return Center(child: CircularProgressIndicator());
-              //     }
-              //     if (snapshot.hasError) {
-              //       return Center(child: Text(snapshot.error.toString()));
-              //     }
-              //
-              //     List<EventModel> events = snapshot.data!;
-              //     return Expanded(
-              //       child: ListView.separated(
-              //         padding: EdgeInsets.symmetric(
-              //           horizontal: 16,
-              //           vertical: 24,
-              //         ),
-              //         itemBuilder: (context, index) =>
-              //             EventItem(event: events[index], markAsFavourite: UserModel.currentUser!.favouriteEventsIds.contains(events[index].id),),
-              //
-              //         separatorBuilder: (context, index) =>
-              //             SizedBox(height: 16.h),
-              //         itemCount: events.length,
-              //       ),
-              //     );
-              //   },
-              // ),
-              // Expanded(child: ListView.separated(
-              //     padding: EdgeInsets.only(top: 16),
-              //     itemBuilder: (context,index)=>EventItem(event: EventModel(id: 1, category: CategoryModel.Categories[0], title: "Meeting for Updating The Development Method ", description: "Meeting for Updating The Development Method ", dateTime: DateTime.now(), ),),
-              //     separatorBuilder: (context, index)=>SizedBox(height: 8,),
-              //     itemCount: 20))
+              CustomTabBar(
+                categories: CategoryModel.getCategoriesWithAll(context),
+                selectedBgColor: ColorsManager.darkBlue,
+                selectedFgColor: ColorsManager.white,
+                unSelectedBgColor: ColorsManager.white,
+                unSelectedFgColor: ColorsManager.black,
+                onCategorySelected: (category) {
+                  setState(() {
+                    selectedCategory = category;
+                  });
+                },
+              ),
+              StreamBuilder(
+                stream: FirebaseServices.getEventsFromFireStoreRealTime(context,selectedCategory),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  if (snapshot.hasError) {
+                    return Center(child: Text(snapshot.error.toString()));
+                  }
+
+                  List<EventModel> events = snapshot.data!;
+                  return Expanded(
+                    child: ListView.separated(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 24,
+                      ),
+                      itemBuilder: (context, index) =>
+                          EventItem(event: events[index], markAsFavourite: UserModel.currentUser!.favouriteEventsIds.contains(events[index].id),),
+
+                      separatorBuilder: (context, index) =>
+                          SizedBox(height: 16),
+                      itemCount: events.length,
+                    ),
+                  );
+                },
+              ),
+
             ],
           ),
         ),
       ),
     );
   }
+
 }

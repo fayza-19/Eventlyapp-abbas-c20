@@ -1,7 +1,6 @@
 import 'package:evently/core/widgets/custom_elevated_buttom.dart';
 import 'package:evently/core/widgets/custometext.dart';
 import 'package:flutter/material.dart';
-
 import '../../core/assets_manager.dart';
 import '../../core/colors_manager.dart';
 import '../../core/extensions/date_time_ex.dart';
@@ -13,7 +12,6 @@ import '../../l10n/app_localizations.dart';
 import '../../models/categorymodel.dart';
 import '../../models/event_model.dart';
 import '../../models/user_model.dart';
-
 class CreateEventScreen extends StatefulWidget {
   const CreateEventScreen({super.key});
 
@@ -153,7 +151,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
     setState(() {});
   }
   void _addEVent()async{
-    EventModel event = EventModel(ownerId: UserModel.loggedInUser!.id,id: "", category: selectedCategory, title: titleController.text, description: desController.text, dateTime: currentDateTime);
+    EventModel event = EventModel(ownerId: UserModel.currentUser!.id,id: "", category: selectedCategory, title: titleController.text, description: desController.text, dateTime: currentDateTime);
     DialogUtils.showLoading(context, dismissible: false);
     await FirebaseServices.addEventToFireStore(event);
     DialogUtils.hideDialog(context);

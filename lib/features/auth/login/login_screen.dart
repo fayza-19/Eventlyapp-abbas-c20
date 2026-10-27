@@ -101,8 +101,16 @@ class _LoginScreenState extends State<LoginScreen> {
     try{
       DialogUtils.showLoading(context, dismissible: false);
       UserCredential userCredential = await FirebaseServices.login(email: emailcontroller.text, password: passcontroller.text);
-      UserModel user = await  FirebaseServices.getUserFromFireStore(userCredential.user!.uid);
-      UserModel.loggedInUser = user;
+      UserModel? user = await FirebaseServices.getUserFromFireStore(userCredential.user!.uid);
+
+      if (user == null) {
+        DialogUtils.showToast("User data not found", Colors.red);
+        return;
+      }
+
+      UserModel.currentUser = user;
+      Navigator.pushReplacementNamed(context, RoutesManager.mainlayout);
+      UserModel.currentUser = user;
       DialogUtils.hideDialog(context);
       DialogUtils.showToast("User Logged-In Successfully", Colors.green);
       Navigator.pushReplacementNamed(context, RoutesManager.mainlayout);
@@ -122,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
       final user = await FirebaseServices.signInWithGoogle();
       DialogUtils.hideDialog(context);
       if (user == null) return; // لغى الاختيار
-      UserModel.loggedInUser = user;
+      UserModel.currentUser = user;
       DialogUtils.showToast("User Logged-In Successfully", Colors.green);
       Navigator.pushReplacementNamed(context, RoutesManager.mainlayout);
     } catch (exception) {

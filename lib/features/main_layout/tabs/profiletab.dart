@@ -24,9 +24,9 @@ class Profiletab extends StatelessWidget {
             ),
             Image.asset(ImageAssets.Profilepic),
             SizedBox(height: 16,),
-            Text(UserModel.loggedInUser!.name,
+            Text(UserModel.currentUser!.name,
                  style: Theme.of(context).textTheme.headlineMedium,)
-            ,Text(UserModel.loggedInUser!.email,
+            ,Text(UserModel.currentUser!.email,
           style: Theme.of(context).textTheme.labelSmall,)
             ,SizedBox(height: 32,),
             Card(child: Padding(

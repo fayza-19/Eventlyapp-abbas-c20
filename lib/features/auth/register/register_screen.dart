@@ -118,7 +118,8 @@ GlobalKey<FormState> formkey = GlobalKey<FormState>();
  try {
    DialogUtils.showLoading(context, dismissible: false);
    UserCredential userCredential = await FirebaseServices.createAccount(email: emailcontroller.text, password: passcontroller.text);
-   UserModel user = UserModel(id: userCredential.user!.uid, name: namecontroller.text, email: emailcontroller.text);
+   UserModel user = UserModel(id: userCredential.user!.uid, name: namecontroller.text, email: emailcontroller.text ,   favouriteEventsIds: [],
+   );
    await FirebaseServices.addUserToFireStore(user);
    DialogUtils.hideDialog(context);
    DialogUtils.showToast("User Registered Successfully", Colors.green);
@@ -150,7 +151,7 @@ GlobalKey<FormState> formkey = GlobalKey<FormState>();
        final user = await FirebaseServices.signInWithGoogle();
        DialogUtils.hideDialog(context);
        if (user == null) return;
-       UserModel.loggedInUser = user;
+       UserModel.currentUser = user;
        DialogUtils.showToast("User Registered Successfully", Colors.green);
        Navigator.pushReplacementNamed(context, RoutesManager.mainlayout);
      } catch (exception) {

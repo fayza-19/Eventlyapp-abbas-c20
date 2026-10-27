@@ -13,45 +13,101 @@ import 'package:provider/provider.dart';
 import 'core/prefsmanager/prefesmanager.dart';
 import 'firebase_services/firebaseservices.dart';
 import 'models/user_model.dart';
+// void main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await  PrefsManager.init();
+//   await  Firebase.initializeApp();
+//
+//   if(FirebaseAuth.instance.currentUser != null){
+//     UserModel.currentUser = await FirebaseServices.getUserFromFireStore(FirebaseAuth.instance.currentUser!.uid);
+//   }
+//   runApp(MultiProvider(
+//     providers: [
+//       ChangeNotifierProvider(create: (context) => ThemeProvider()),
+//       ChangeNotifierProvider(create: (context) => LangProvider()),
+//     ],
+//     child: const Evently(),
+//   ),);
+// }
+// class Evently extends StatelessWidget {
+//   const Evently({super.key});
+//   @override
+//   Widget build(BuildContext context) {
+//     ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
+//     LangProvider langProvider = Provider.of<LangProvider>(context);
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       initialRoute: PrefsManager.isOnboardingSeen()
+//         ? RoutesManager.loginscreen
+//         : RoutesManager.mainlayout
+//       ,
+//       onGenerateRoute: RoutesManager.getRoute,
+//       theme:ThemeManager.light ,
+//       darkTheme: ThemeManager.dark,
+//       themeMode: themeProvider.currentTheme
+//       ,localizationsDelegates: AppLocalizations.localizationsDelegates
+//       , supportedLocales: [
+//       Locale('en'),
+//       Locale('ar'),
+//     ],
+//       locale: Locale(langProvider.currentLanguage),
+//     );
+//   }
+// }
+//
+//
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await  PrefsManager.init();
-  await  Firebase.initializeApp();
-  if(FirebaseAuth.instance.currentUser != null){
-    UserModel.loggedInUser = await FirebaseServices.getUserFromFireStore(FirebaseAuth.instance.currentUser!.uid);
+  await PrefsManager.init();
+  await Firebase.initializeApp();
+
+  String initialRoute = RoutesManager.loginscreen; // default value
+
+  if (!PrefsManager.isOnboardingSeen()) {
+    initialRoute = RoutesManager.onboarding; // use your onboarding route name
+  } else if (FirebaseAuth.instance.currentUser != null) {
+    UserModel? user = await FirebaseServices.getUserFromFireStore(
+      FirebaseAuth.instance.currentUser!.uid,
+    );
+    if (user != null) {
+      UserModel.currentUser = user;
+      initialRoute = RoutesManager.mainlayout;
+    }
   }
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (context) => ThemeProvider()),
-      ChangeNotifierProvider(create: (context) => LangProvider()),
-    ],
-    child: const Evently(),
-  ),);
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
+        ChangeNotifierProvider(create: (context) => LangProvider()),
+      ],
+      child: Evently(initialRoute: initialRoute),
+    ),
+  );
 }
+
 class Evently extends StatelessWidget {
-  const Evently({super.key});
+  const Evently({super.key, required this.initialRoute});
+  final String initialRoute;
+
   @override
   Widget build(BuildContext context) {
     ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
     LangProvider langProvider = Provider.of<LangProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: RoutesManager.loginscreen,
-      // PrefsManager.isOnboardingSeen()
-      //   ? RoutesManager.loginscreen
-      //   : RoutesManager.onboarding,
+      initialRoute: initialRoute,
       onGenerateRoute: RoutesManager.getRoute,
-      theme:ThemeManager.light ,
+      theme: ThemeManager.light,
       darkTheme: ThemeManager.dark,
-      themeMode: themeProvider.currentTheme
-      ,localizationsDelegates: AppLocalizations.localizationsDelegates
-      , supportedLocales: [
-      Locale('en'),
-      Locale('ar'),
-    ],
+      themeMode: themeProvider.currentTheme,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: [
+        Locale('en'),
+        Locale('ar'),
+      ],
       locale: Locale(langProvider.currentLanguage),
     );
   }
 }
-
-

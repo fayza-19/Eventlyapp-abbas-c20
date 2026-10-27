@@ -102,7 +102,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get event_details => 'Event details';
 
   @override
-  String get update_event => 'Update Event';
+  String get update_event => 'Update event';
 
   @override
   String get sports => 'Sports';
@@ -182,4 +182,20 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sign_up_with_google => 'Sign up with Google';
+
+  @override
+  String get edit_event => 'Edit event';
+
+  @override
+  String get delete_event => 'Delete event';
+
+  @override
+  String get delete_event_confirmation =>
+      'Are you sure you want to delete this event?';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get delete => 'Delete';
 }

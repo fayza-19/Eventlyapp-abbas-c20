@@ -57,5 +57,12 @@
     "obSkip": "تخطي",
     "or": "أو",
     "login_with_google": "تسجيل الدخول باستخدام جوجل",
-    "sign_up_with_google": "إنشاء حساب باستخدام جوجل"
+    "sign_up_with_google": "إنشاء حساب باستخدام جوجل",
+    "edit_event": "تعديل الحدث",
+    "update_event": "تحديث الحدث",
+    "event_details": "تفاصيل الحدث",
+    "delete_event": "حذف الحدث",
+    "delete_event_confirmation": "هل أنت متأكد أنك تريد حذف هذا الحدث؟",
+    "cancel": "إلغاء",
+    "delete": "حذف"
 }

@@ -287,7 +287,7 @@ abstract class AppLocalizations {
   /// No description provided for @update_event.
   ///
   /// In en, this message translates to:
-  /// **'Update Event'**
+  /// **'Update event'**
   String get update_event;
 
   /// No description provided for @sports.
@@ -439,6 +439,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sign up with Google'**
   String get sign_up_with_google;
+
+  /// No description provided for @edit_event.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit event'**
+  String get edit_event;
+
+  /// No description provided for @delete_event.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete event'**
+  String get delete_event;
+
+  /// No description provided for @delete_event_confirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete this event?'**
+  String get delete_event_confirmation;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
 }
 
 class _AppLocalizationsDelegate
